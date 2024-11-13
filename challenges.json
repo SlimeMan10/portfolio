@@ -1,0 +1,44 @@
+{
+  "3Sum": {
+    "name": "3Sum",
+    "difficulty": "Medium",
+    "topic": "Array, Two Pointers, Sorting",
+    "solution": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        Arrays.sort(nums);\n        List<List<Integer>> list = new ArrayList<>();\n        for (int i = 0; i < nums.length; i++) {\n            if (nums[i] > 0) {\n                break;\n            }\n            if (i > 0 && nums[i] == nums[i-1]) {\n                continue;\n            }\n            int left = i + 1;\n            int right = nums.length - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum > 0) {\n                    right--;\n                } else if (sum < 0) {\n                    left++;\n                } else {\n                    list.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    left++;\n                    right--;\n                    while (left < right && nums[left] == nums[left - 1]) {\n                        left++;\n                    }\n                }\n            }\n        }\n        return list;\n    }\n}"
+  },
+  "2Sum": {
+    "name": "2Sum",
+    "difficulty": "Easy",
+    "topic": "Array, Two Pointers, Sorting",
+    "solution": "class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        Map<Integer, Integer> map = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int complement = target - nums[i];\n            if (map.containsKey(complement)) {\n                return new int[] { map.get(complement), i };\n            }\n            map.put(nums[i], i);\n        }\n        return new int[] {};\n    }\n}"
+  },
+  "Evaluate Reverse Polish Notation": {
+    "name": "Evaluate Reverse Polish Notation",
+    "difficulty": "Medium",
+    "topic": "Array, Math, Stacks",
+    "solution": "class Solution {\n    public int evalRPN(String[] tokens) {\n        Stack<Integer> stack = new Stack<>();\n        \n        for (String curr : tokens) {\n            if (curr.equals(\"*\")) {\n                int num2 = stack.pop();\n                int num1 = stack.pop();\n                stack.push(num1 * num2);\n            } else if (curr.equals(\"+\")) {\n                int num2 = stack.pop();\n                int num1 = stack.pop();\n                stack.push(num1 + num2);\n            } else if (curr.equals(\"-\")) {\n                int num2 = stack.pop();\n                int num1 = stack.pop();\n                stack.push(num1 - num2);\n            } else if (curr.equals(\"/\")) {\n                int num2 = stack.pop();\n                int num1 = stack.pop();\n                stack.push(num1 / num2);\n            } else {\n                stack.push(Integer.parseInt(curr));\n            }\n        }\n        \n        return stack.pop();\n    }\n}"
+  },
+  "Min Stack": {
+    "name": "Min Stack",
+    "difficulty": "Medium",
+    "topic": "Stack, Design",
+    "solution": "class MinStack {\n    private Stack<Integer> stack;\n    private Stack<Integer> minStack;\n    private int size;\n\n    public MinStack() {\n        stack = new Stack<>();\n        minStack = new Stack<>();\n    }\n    \n    public void push(int val) {\n        stack.push(val);\n        if (minStack.isEmpty() || val <= minStack.peek()) {\n            minStack.push(val);\n        } \n    }\n    \n    public void pop() {\n        if(stack.peek().equals(minStack.peek())) {\n            minStack.pop();\n        }\n        stack.pop();\n        \n    }\n    \n    public int top() {\n        return stack.peek();\n    }\n    \n    public int getMin() {\n        return minStack.peek();\n    }\n}"
+  },
+  "Longest Consecutive Sequence": {
+    "name": "Longest Consecutive Sequence",
+    "difficulty": "Medium",
+    "topic": "Array, Hash Table, Union Find",
+    "solution": "class Solution {\n    public int longestConsecutive(int[] nums) {\n        Set<Integer> set = new HashSet<>();\n        //populate set with all nums\n        for (int num : nums) {\n            set.add(num);\n        }\n        int longest = 0;\n        for (int num : nums) {\n            if (!set.contains(num - 1)) {\n                int length = 1;\n                while (set.contains(num + length)) {\n                    length++;\n                }\n                longest = Math.max(longest, length);\n            }\n        }\n        return longest;\n    }\n}"
+  },
+  "Two Sum II - Input Array Is Sorted": {
+    "name": "Two Sum II - Input Array Is Sorted",
+    "difficulty": "Medium",
+    "topic": "Array, Two Pointer, Binary Search",
+    "solution": "class Solution {\n    public int[] twoSum(int[] numbers, int target) {\n        //front and end points\n        int left = 0;\n        int right = numbers.length - 1;\n        boolean found = false;\n        while (!found) {\n            int sum = numbers[left] + numbers[right];\n            if (sum == target) {\n                return new int[] {left+1, right+1};\n            } else if (sum < target) {\n                //sum is less so increase left\n                left++;\n            } else {\n                //sum is greater so decrease right\n                right--;\n            }\n        }\n        return new int[2];\n    }\n}"
+  },
+  "Product of Array Except Self": {
+    "name": "Product of Array Except Self",
+    "difficulty": "Medium",
+    "topic": "Array, Prefix Sum",
+    "solution": "public class Solution {\n    public int[] productExceptSelf(int[] nums) {\n        int zeros = 0;\n        int prod = 1;\n        int length = nums.length;\n        //count nums\n        for (int num : nums) {\n            if (num != 0) {\n                prod *= num;\n            } else {\n                zeros++;\n            }\n        }\n        //if we have 2 or more zeros then the list is empty\n        if (zeros >= 2) {\n            return new int[length];\n        }\n        //go through nums and fill ans array\n        int[] ans = new int[length];\n        for (int i = 0; i < length; i++) {\n            if (zeros == 1) {\n                ans[i] = (nums[i] == 0) ? prod : 0;\n            } else {\n                ans[i] = prod / nums[i];\n            }\n        }\n        return ans;\n    }\n}"
+  }
+}
