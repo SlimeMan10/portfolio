@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #f8f8f4;
   color: #333;
   line-height: 1.6;
@@ -126,7 +126,7 @@ section {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .card img {
@@ -147,7 +147,7 @@ section {
   background-color: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }
 
@@ -177,7 +177,7 @@ section {
 }
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 
 /* Form Elements */
@@ -197,7 +197,8 @@ textarea {
 }
 
 /* Button styling */
-button, .button-link {
+button,
+.button-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -213,7 +214,8 @@ button, .button-link {
   transition: all 0.2s ease;
 }
 
-button:hover, .button-link:hover {
+button:hover,
+.button-link:hover {
   background-color: #6a1b9a;
   transform: translateY(-2px);
 }
@@ -231,7 +233,7 @@ button:hover, .button-link:hover {
   padding: 2rem;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -297,8 +299,6 @@ footer {
   }
 }
 
-/* Add these styles to your existing CSS */
-
 /* Code Challenge Cards */
 #challenges-container {
   display: flex;
@@ -332,13 +332,13 @@ footer {
   margin: 0;
 }
 
-.challenge-header::after {
+.challenge-header:after {
   content: '▼';
   color: #4a148c;
   transition: transform 0.3s ease;
 }
 
-.expanded .challenge-header::after {
+.expanded .challenge-header:after {
   transform: rotate(180deg);
 }
 
@@ -390,7 +390,7 @@ footer {
   margin-bottom: 1rem;
 }
 
-/* Admin section for challenges */
+/* Admin section */
 .admin-section {
   margin-top: 2rem;
   padding-top: 2rem;
@@ -405,15 +405,8 @@ footer {
   margin: 2rem auto;
 }
 
-#challenge-solution {
-  min-height: 150px;
-  font-family: monospace;
-}
-
-/* Update these styles in your CSS */
-
-/* First, change your notes textarea id to match your JavaScript */
-#challenge-notes {  /* Change from #notes to #challenge-notes to match your JS */
+#challenge-solution,
+#challenge-notes {
   min-height: 150px;
   font-family: monospace;
   width: 100%;
@@ -422,17 +415,4 @@ footer {
   border-radius: 4px;
   font-size: 1rem;
   resize: vertical;
-}
-
-/* For the challenge content display */
-.challenge-card pre {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 4px;
-  overflow-x: auto;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-family: monospace;
-  margin-top: 1rem;
-  white-space: pre-wrap;
-  word-wrap: break-word;
 }
