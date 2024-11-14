@@ -8,7 +8,7 @@ const fs = require("fs").promises;
 // For parsing JSON
 app.use(express.json());
 // Set the correct path to your public folder
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static('public'));
 app.use(multer().none());
 app.use(express.urlencoded({ extended: true }))
 
