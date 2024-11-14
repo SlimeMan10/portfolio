@@ -74,7 +74,7 @@ body {
 }
 
 #language-skills {
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #666;
   margin-bottom: 2rem;
 }
@@ -408,4 +408,31 @@ footer {
 #challenge-solution {
   min-height: 150px;
   font-family: monospace;
+}
+
+/* Update these styles in your CSS */
+
+/* First, change your notes textarea id to match your JavaScript */
+#challenge-notes {  /* Change from #notes to #challenge-notes to match your JS */
+  min-height: 150px;
+  font-family: monospace;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+/* For the challenge content display */
+.challenge-card pre {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: monospace;
+  margin-top: 1rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }

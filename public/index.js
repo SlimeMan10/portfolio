@@ -13,6 +13,30 @@
       addChallenge.addEventListener('click', addNewChallenge);
     }
     id('show-challenges').addEventListener('click', loadChallenges);
+    buttonEvents();
+  }
+
+  function buttonEvents() {
+    const resumeLink = 'https://tinyurl.com/nzpwnmw6';
+    const javaLink = 'https://tinyurl.com/4ma4b4ex';
+    const htmlLink = 'https://tinyurl.com/2cdttxtx';
+    const cssLink = 'https://tinyurl.com/2suk2e2v';
+    const jsLink = 'https://tinyurl.com/29rjtyrm';
+    const sqlLink = 'https://tinyurl.com/2mkkfkm5';
+    const nodeLink = 'https://tinyurl.com/mryd2jj6';
+    openPage('resume', resumeLink);
+    openPage('javaCard', javaLink);
+    openPage('htmlCard', htmlLink);
+    openPage('cssCard', cssLink);
+    openPage('javascriptCard', jsLink);
+    openPage('sqlCard', sqlLink);
+    openPage('nodeCard', nodeLink);
+  }
+
+  function openPage(itemId, link) {
+    id(itemId).addEventListener('click', function() {
+      window.open(link, '_blank');
+    });
   }
 
   async function loadChallenges() {
@@ -26,7 +50,6 @@
       });
       if (response.ok) {
         const challenges = await response.json();
-        console.log(challenges);
         displayChallenges(challenges);
       } else {
         console.error("Error loading challenges")
@@ -38,15 +61,15 @@
 
   function displayChallenges(challenges) {
     id('challenges-container').innerHTML = '';
-    const search = id('search-challenges').value;  // Add .value
-    const diff = id('filter-difficulty').value;    // Fix quotes in id
+    const search = id('search-challenges').value;
+    const diff = id('filter-difficulty').value;
 
     if (search) {  // If there's a search term
       const filteredChallenges = challenges.filter(challenge =>
         challenge.name.toLowerCase().includes(search.toLowerCase())
       );
       createNormalChallenges(filteredChallenges);
-    } else if (diff === 'Easy' || diff === 'Medium' || diff === 'Hard') {  // Add quotes
+    } else if (diff === 'Easy' || diff === 'Medium' || diff === 'Hard') {
       const filteredChallenges = challenges.filter(challenge =>
         challenge.difficulty === diff
       );
@@ -63,9 +86,27 @@
       let cardDifficulty = createCardDifficulty(element);
       let cardTopic = createCardTopic(element);
       let cardSolution = createCardSolution(element);
-      finalizeCard(challengeCard, cardName, cardDifficulty, cardTopic, cardSolution);
+      let cardNotes = createCardNotes(element);
+      challengeCard.addEventListener('click', () => {
+        cardDifficulty.classList.toggle('hidden');
+        cardTopic.classList.toggle('hidden');
+        cardSolution.classList.toggle('hidden');
+        cardNotes.classList.toggle('hidden');
+      });
+      challengeCard.appendChild(cardName);
+      challengeCard.appendChild(cardDifficulty);
+      challengeCard.appendChild(cardTopic);
+      challengeCard.appendChild(cardSolution);
+      challengeCard.appendChild(cardNotes);
       id('challenges-container').appendChild(challengeCard);
     });
+  }
+
+  function createCardNotes(element) {
+    let cardNotes = gen('pre');
+    cardNotes.textContent = element.notes;
+    cardNotes.classList.add('hidden');
+    return cardNotes;
   }
 
   function createChallengeCard() {
@@ -101,18 +142,6 @@
     return cardSolution;
   }
 
-  function finalizeCard(challengeCard, cardName, cardDifficulty, cardTopic, cardSolution) {
-    challengeCard.addEventListener('click', () => {
-      cardDifficulty.classList.toggle('hidden');
-      cardTopic.classList.toggle('hidden');
-      cardSolution.classList.toggle('hidden');
-    });
-    challengeCard.appendChild(cardName);
-    challengeCard.appendChild(cardDifficulty);
-    challengeCard.appendChild(cardTopic);
-    challengeCard.appendChild(cardSolution);
-    return challengeCard
-  }
   /**
    * Validates the admin password by sending it to the server as JSON.
    * The password is sent in the format: { "password": "userInput" }
@@ -158,6 +187,7 @@
       let difficulty = id('challenge-difficulty').value;
       let topic = id('challenge-topic').value;
       let solution = id('challenge-solution').value;
+      let notes = id('challenge-notes').value;
       const response = await fetch('/add', {
         method: 'POST',
         headers: {
@@ -167,7 +197,8 @@
           name: name,
           difficulty: difficulty,
           topic: topic,
-          solution: solution
+          solution: solution,
+          notes: notes
         })
       });
 
@@ -177,8 +208,8 @@
         id('challenge-difficulty').value = 'Easy';
         id('challenge-topic').value = '';
         id('challenge-solution').value = '';
-        console.log(text)
-;      }
+        id('challenge-notes').value = '';
+      }
     } catch (error) {
       console.error('Error: ', error);
     }

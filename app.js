@@ -30,8 +30,8 @@ app.post("/add", async function(req, res) {
   let difficulty = req.body.difficulty;
   let topic = req.body.topic;
   let solution = req.body.solution;
-
-  if (name && difficulty && topic && solution) {
+  let notes = req.body.notes;
+  if (name && difficulty && topic && solution && notes) {
     try {
       let data = {};
       // If file exists, read it; if not, start with empty object
@@ -46,7 +46,8 @@ app.post("/add", async function(req, res) {
         name,
         difficulty,
         topic,
-        solution
+        solution,
+        notes
       };
 
       await fs.writeFile("challenges.json", JSON.stringify(data, null, 2));

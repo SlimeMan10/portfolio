@@ -20,7 +20,9 @@
         <!-- Introduction section -->
         <section id="top-of-page">
             <p id="introduction">Hello, I am Justin. An aspiring Software Engineer</p>
-            <p id="language-skills">Java Developer</p>
+            <p id="language-skills">As an aspiring Software Developer at the University of Washington, my fascination with Software Development began in my childhood with hacking and game development, which evolved into a passion for coding when I saw the intersection of mathematics and programming. Whether implementing a factorial calculator using the gamma function–exploring the beauty of math functions in programming-or optimizing backend systems, I'm driven by the elegant relationship between mathematical principles and practical problem-solving.
+
+                Beyond my technical foundation in Java, SQL, and web development languages, I commit to creating technology that serves everyone equally. I am especially drawn to backend development, with a goal of building more inclusive and thoroughly implemented systems. Currently, I am developing a fitness-tracking website while learning ways to address technological biases. As I continue to grow, I want to contribute to eliminating technological injustices while maintaining the mathematical rigor that makes software development both challenging and meaningful.</p>
             <div class="button-container">
                 <button id="resume">Download Resume</button>
                 <a href="#contact" id="contact-jump" class="button-link">Contact me</a>
@@ -31,35 +33,35 @@
         <section id="skills">
             <h1>Skills</h1>
             <div class="card-container">
-                <a href="#" class="card">
-                    <p>Java</p>
-                    <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java logo">
-                </a>
+              <div id="javaCard" class="card">
+                <p>Java</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java logo">
+              </div>
 
-                <a href="#" class="card">
-                    <p>HTML</p>
-                    <img src="https://tinyurl.com/y5p9d9nm" alt="HTML5 logo">
-                </a>
+              <div id="htmlCard" class="card">
+                  <p>HTML</p>
+                  <img src="https://tinyurl.com/y5p9d9nm" alt="HTML5 logo">
+              </div>
 
-                <a href="#" class="card">
-                    <p>CSS</p>
-                    <img src="https://tinyurl.com/mr4xk83j" alt="CSS logo">
-                </a>
+              <div id="cssCard" class="card">
+                  <p>CSS</p>
+                  <img src="https://tinyurl.com/mr4xk83j" alt="CSS logo">
+              </div>
 
-                <a href="#" class="card">
-                    <p>JavaScript</p>
-                    <img src="https://tinyurl.com/4mksjt3y" alt="JavaScript logo">
-                </a>
+              <div id="javascriptCard" class="card">
+                  <p>JavaScript</p>
+                  <img src="https://tinyurl.com/4mksjt3y" alt="JavaScript logo">
+              </div>
 
-                <a href="#" class="card">
-                    <p>SQL</p>
-                    <img src="https://banner2.cleanpng.com/20180526/oqt/avq6683ud.webp" alt="SQL logo">
-                </a>
+              <div id="sqlCard" class="card">
+                  <p>SQL</p>
+                  <img src="https://banner2.cleanpng.com/20180526/oqt/avq6683ud.webp" alt="SQL logo">
+              </div>
 
-                <a href="#" class="card">
-                    <p>Node.js</p>
-                    <img src="https://static-00.iconduck.com/assets.00/node-js-icon-909x1024-ig4gm9k7.png" alt="Node.JS logo">
-                </a>
+              <div id="nodeCard" class="card">
+                  <p>Node.js</p>
+                  <img src="https://static-00.iconduck.com/assets.00/node-js-icon-909x1024-ig4gm9k7.png" alt="Node.JS logo">
+              </div>
             </div>
         </section>
 
@@ -69,11 +71,10 @@
             <article class="project-card">
                 <h2>Fitness Tracker</h2>
                 <p>Fitness Tracker, Seattle, WA | HTML, CSS, JavaScript, SQL | Sep 2024 - Present</p>
-                <ul>
-                    <li>Developing a fitness tracking website focused on weight lifting using HTML, CSS, JavaScript, and SQL</li>
-                    <li>Designed a user-friendly interface to log workout routines and track progress.</li>
-                    <li>Implementing a database to store user profiles, workout history, and performance data.</li>
-                </ul>
+                <p>
+                    In 2021, I often found myself frustrated with existing fitness apps that couldn't track the specific intensity techniques I used in my bodybuilding workouts. This led me to envision more specialized tracking solutions. When I began my web development course at UW in Fall 2024, I saw an opportunity to turn this idea into reality.
+                    I started by creating a draft of the user interface, focusing on the features I wished existed in other apps. Using HTML and CSS, I made the website framework. I implemented basic functionality for logging workouts through JavaScript, which helped me understand DOM manipulation and event handling. This project is my first step into web development, showing my ability to apply classroom concepts to solve real-world problems I've experienced. While still in its early stages, working on this project has strengthened my understanding of frontend development fundamentals and motivated me to continue expanding my technical skills
+                </p>
             </article>
         </section>
 
@@ -108,14 +109,15 @@
                     <h2>Add New Challenge</h2>
                     <input type="text" id="challenge-name" placeholder="Challenge name" required>
                     <select id="challenge-difficulty" required>
-                        <option value="Easy">Easy</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Hard">Hard</option>
+                      <option value="Easy">Easy</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Hard">Hard</option>
                     </select>
                     <input type="text" id="challenge-topic" placeholder="Topic (e.g., Arrays, Strings)" required>
                     <textarea id="challenge-solution" placeholder="Your solution" required></textarea>
+                    <textarea id="challenge-notes" placeholder="Your notes" required></textarea>
                     <button type="submit" id="add-challenge">Add Challenge</button>
-                </form>
+                  </form>
             </div>
         </section>
     </main>
