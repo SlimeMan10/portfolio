@@ -379,10 +379,6 @@ footer {
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
-  -ms-word-break: break-all;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
   hyphens: auto;
 }
 
@@ -420,18 +416,6 @@ footer {
   gap: 1rem;
   max-width: 600px;
   margin: 2rem auto;
-}
-
-#challenge-solution,
-#challenge-notes {
-  min-height: 150px;
-  font-family: monospace;
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  font-size: 1rem;
-  resize: vertical;
 }
 
 @media (max-width: 768px) {

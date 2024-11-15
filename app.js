@@ -33,7 +33,11 @@ app.post("/add", async function(req, res) {
   if (name && difficulty && topic && solution && notes) {
     try {
       let data = {};
-      if (await fs.access("challenges.json").then(() => true).catch(() => false)) {
+      const fileExists = await fs.access("challenges.json")
+        .then(() => true)
+        .catch(() => false);
+
+      if (fileExists) {
         data = JSON.parse(await fs.readFile("challenges.json", "utf8"));
       }
       let challengeExists = data[name];
