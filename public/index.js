@@ -7,38 +7,43 @@
    * Initializes the page by setting up event listeners
    */
   function init() {
-    // Setup admin login events
-    id('show-admin').addEventListener('click', function() {
-      id("admin-login").classList.toggle('hidden');
-      id('login-btn').addEventListener('click', validateLogin);
-    });
-
+    // Check if elements exist before adding listeners
+    const showAdminBtn = id('show-admin');
+    if (showAdminBtn) {
+      showAdminBtn.addEventListener('click', function() {
+        const adminLogin = id("admin-login");
+        if (adminLogin) {
+          adminLogin.classList.toggle('hidden');
+          const loginBtn = id('login-btn');
+          if (loginBtn) {
+            loginBtn.addEventListener('click', validateLogin);
+          }
+        }
+      });
+    }
     const addChallenge = id('add-challenge');
     if (addChallenge) {
       addChallenge.addEventListener('click', addNewChallenge);
     }
-
-    id('show-challenges').addEventListener('click', loadChallenges);
+    const showChallenges = id('show-challenges');
+    if (showChallenges) {
+      showChallenges.addEventListener('click', loadChallenges);
+    }
     buttonEvents();
   }
+
 
   /**
    * Sets up button events for all card links
    */
   function buttonEvents() {
-    const links = {
-      resume: 'https://tinyurl.com/nzpwnmw6',
-      javaCard: 'https://tinyurl.com/4ma4b4ex',
-      htmlCard: 'https://tinyurl.com/2cdttxtx',
-      cssCard: 'https://tinyurl.com/2suk2e2v',
-      javascriptCard: 'https://tinyurl.com/29rjtyrm',
-      sqlCard: 'https://tinyurl.com/2mkkfkm5',
-      nodeCard: 'https://tinyurl.com/mryd2jj6'
-    };
-
-    Object.entries(links).forEach(([id, link]) => {
-      openPage(id, link);
-    });
+    openPage('resume', 'https://tinyurl.com/nzpwnmw6');
+    openPage('java-card', 'https://tinyurl.com/4ma4b4ex');
+    openPage('html-card', 'https://tinyurl.com/2cdttxtx');
+    openPage('css-card', 'https://tinyurl.com/2suk2e2v');
+    openPage('javascript-card', 'https://tinyurl.com/29rjtyrm');
+    openPage('sql-card', 'https://tinyurl.com/2mkkfkm5');
+    openPage('node-card', 'https://tinyurl.com/mryd2jj6');
   }
 
   /**
@@ -47,9 +52,12 @@
    * @param {string} link - The URL to open
    */
   function openPage(itemId, link) {
-    id(itemId).addEventListener('click', function() {
-      window.open(link, '_blank');
-    });
+    const element = id(itemId);
+    if (element) {
+      element.addEventListener('click', function() {
+        window.open(link, '_blank');
+      });
+    }
   }
 
   /**
