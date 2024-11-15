@@ -32,7 +32,6 @@
     buttonEvents();
   }
 
-
   /**
    * Sets up button events for all card links
    */
@@ -94,8 +93,11 @@
 
     let filteredChallenges = challenges;
     if (search) {
-      filteredChallenges = challenges.filter(challenge => challenge.name.toLowerCase().includes
-      (search.toLowerCase()));
+      filteredChallenges = challenges.filter(challenge => {
+        const challengeName = challenge.name.toLowerCase();
+        const searchTerm = search.toLowerCase();
+        return challengeName.includes(searchTerm);
+      });
     } else if (['Easy', 'Medium', 'Hard'].includes(diff)) {
       filteredChallenges = challenges.filter(challenge => challenge.difficulty === diff);
     }

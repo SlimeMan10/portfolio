@@ -29,32 +29,16 @@ app.post("/validate", function(req, res) {
 
 app.post("/add", async function(req, res) {
   res.type("text");
-  const {name, difficulty, topic, solution, notes} = req.body;
-
+  let {name, difficulty, topic, solution, notes} = req.body;
   if (name && difficulty && topic && solution && notes) {
     try {
       let data = {};
-
-      // If file exists, read it; if not, start with empty object
-      const fileExists = await fs.access("challenges.json")
-        .then(() => true)
-        .catch(() => false);
-
-      if (fileExists) {
+      if (await fs.access("challenges.json").then(() => true).catch(() => false)) {
         data = JSON.parse(await fs.readFile("challenges.json", "utf8"));
       }
-
-      const challengeExists = data[name];
-      const response = challengeExists ? "Updated challenge information" : "Added new challenge";
-
-      data[name] = {
-        name,
-        difficulty,
-        topic,
-        solution,
-        notes
-      };
-
+      let challengeExists = data[name];
+      let response = challengeExists ? "Updated challenge information" : "Added new challenge";
+      data[name] = {name, difficulty, topic, solution, notes};
       await fs.writeFile("challenges.json", JSON.stringify(data, null, 2));
       res.send(response);
     } catch (err) {
