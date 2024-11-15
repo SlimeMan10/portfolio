@@ -1,5 +1,8 @@
 // app.js
 "use strict";
+const serverError = 500;
+const userError = 400;
+const numPort = 8000;
 const express = require("express");
 const app = express();
 const multer = require("multer");
@@ -18,7 +21,7 @@ const PASSWORD = "shibaInu!=fox";
 app.post("/validate", function(req, res) {
   const submittedPassword = req.body.password;
   if (!submittedPassword) {
-    res.status(400).json({isValid: false, message: "Missing password parameter"});
+    res.status(userError).json({isValid: false, message: "Missing password parameter"});
   } else {
     res.json({isValid: submittedPassword === PASSWORD});
   }
@@ -56,10 +59,10 @@ app.post("/add", async function(req, res) {
       res.send(response);
     } catch (err) {
       console.error("Error:", err);
-      res.status(500).send("Something went wrong on the server");
+      res.status(serverError).send("Something went wrong on the server");
     }
   } else {
-    res.status(400).send("Missing required parameters");
+    res.status(userError).send("Missing required parameters");
   }
 });
 
@@ -72,16 +75,16 @@ app.get("/retrieveChallenge", async function(req, res) {
       if (requestedChallenge) {
         res.json(requestedChallenge);
       } else {
-        res.status(404).json({error: "Challenge not found"});
+        res.status(serverError).json({error: "Challenge not found"});
       }
     } else {
       res.json(Object.values(challenges));
     }
   } catch (err) {
     console.error("Error reading challenges:", err);
-    res.status(500).json({error: "Error retrieving challenges"});
+    res.status(serverError).json({error: "Error retrieving challenges"});
   }
 });
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || numPort;
 app.listen(PORT);

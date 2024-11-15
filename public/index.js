@@ -86,13 +86,11 @@
 
     let filteredChallenges = challenges;
     if (search) {
-      filteredChallenges = challenges.filter(challenge =>
-        challenge.name.toLowerCase().includes(search.toLowerCase()));
+      filteredChallenges = challenges.filter(challenge => challenge.name.toLowerCase().includes
+      (search.toLowerCase()));
     } else if (['Easy', 'Medium', 'Hard'].includes(diff)) {
-      filteredChallenges = challenges.filter(challenge =>
-        challenge.difficulty === diff);
+      filteredChallenges = challenges.filter(challenge => challenge.difficulty === diff);
     }
-
     createNormalChallenges(filteredChallenges);
   }
 
@@ -102,27 +100,29 @@
    */
   function createNormalChallenges(challenges) {
     challenges.forEach(element => {
-      const challengeCard = createChallengeCard();
-      const cardElements = {
-        name: createCardName(element),
-        difficulty: createCardDifficulty(element),
-        topic: createCardTopic(element),
-        solution: createCardSolution(element),
-        notes: createCardNotes(element)
-      };
-
-      challengeCard.addEventListener('click', () => {
-        Object.values(cardElements).forEach(el => {
-          if (el !== cardElements.name) {
-            el.classList.toggle('hidden');
-          }
-        });
+      const challengeCard = gen('div');
+      challengeCard.classList.add('challenge-card');
+      const header = gen('div');
+      header.classList.add('challenge-header');
+      const name = createCardName(element);
+      header.appendChild(name);
+      const content = gen('div');
+      content.classList.add('challenge-content');
+      content.classList.add('hidden');
+      const difficulty = createCardDifficulty(element);
+      const topic = createCardTopic(element);
+      const solution = createCardSolution(element);
+      const notes = createCardNotes(element);
+      content.appendChild(difficulty);
+      content.appendChild(topic);
+      content.appendChild(solution);
+      content.appendChild(notes);
+      header.addEventListener('click', () => {
+        content.classList.toggle('hidden');
+        challengeCard.classList.toggle('expanded');
       });
-
-      Object.values(cardElements).forEach(el => {
-        challengeCard.appendChild(el);
-      });
-
+      challengeCard.appendChild(header);
+      challengeCard.appendChild(content);
       id('challenges-container').appendChild(challengeCard);
     });
   }
@@ -135,18 +135,8 @@
   function createCardNotes(element) {
     const cardNotes = gen('pre');
     cardNotes.textContent = element.notes;
-    cardNotes.classList.add('hidden');
+    cardNotes.classList.add('challenge-notes');
     return cardNotes;
-  }
-
-  /**
-   * Creates challenge card container
-   * @return {HTMLElement} Challenge card container
-   */
-  function createChallengeCard() {
-    const challengeCard = gen('div');
-    challengeCard.classList.add('challenge-card');
-    return challengeCard;
   }
 
   /**
@@ -168,7 +158,7 @@
   function createCardDifficulty(element) {
     const cardDifficulty = gen('p');
     cardDifficulty.textContent = "Difficulty: " + element.difficulty;
-    cardDifficulty.classList.add('hidden');
+    cardDifficulty.classList.add('challenge-difficulty');
     return cardDifficulty;
   }
 
@@ -180,7 +170,7 @@
   function createCardTopic(element) {
     const cardTopic = gen('p');
     cardTopic.textContent = "Topics: " + element.topic;
-    cardTopic.classList.add('hidden');
+    cardTopic.classList.add('challenge-topic');
     return cardTopic;
   }
 
@@ -192,7 +182,7 @@
   function createCardSolution(element) {
     const cardSolution = gen('pre');
     cardSolution.textContent = element.solution;
-    cardSolution.classList.add('hidden');
+    cardSolution.classList.add('challenge-solution');
     return cardSolution;
   }
 

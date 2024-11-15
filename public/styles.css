@@ -168,10 +168,6 @@ section {
   flex-wrap: wrap;
 }
 
-.challenge-content {
-  display: none;
-}
-
 .expanded .challenge-content {
   display: block;
 }
@@ -314,6 +310,8 @@ footer {
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .challenge-header {
@@ -346,18 +344,25 @@ footer {
   padding: 1.5rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #f8f8f8;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
+.challenge-content p,
 .challenge-content pre {
   background-color: white;
   padding: 1rem;
   border-radius: 4px;
-  overflow-x: auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
   font-family: monospace;
   margin-top: 1rem;
   white-space: pre-wrap;
   word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 /* Difficulty badges */
@@ -367,6 +372,18 @@ footer {
   border-radius: 9999px;
   font-size: 0.75rem;
   margin: 0.5rem 0;
+}
+
+.challenge-content * {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-word-break: break-all;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .difficulty-easy {
@@ -415,4 +432,28 @@ footer {
   border-radius: 4px;
   font-size: 1rem;
   resize: vertical;
+}
+
+@media (max-width: 768px) {
+  .challenge-content p,
+  .challenge-content pre {
+    font-size: 0.8rem;
+    padding: 0.75rem;
+  }
+}
+
+#challenge-solution,
+#challenge-notes {
+  min-height: 150px;
+  font-family: monospace;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
