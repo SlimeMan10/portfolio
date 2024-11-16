@@ -41,7 +41,7 @@ app.post("/add", async function(req, res) {
       }
       let challengeExists = data[name];
       let response = challengeExists ? "Updated challenge information" : "Added new challenge";
-      data[name] = {name, difficulty, topic, solution, notes};
+      writeData(data, name, difficulty, topic, solution, notes);
       await fs.writeFile("challenges.json", JSON.stringify(data, null, 2));
       res.send(response);
     } catch (err) {
@@ -55,23 +55,9 @@ app.post("/add", async function(req, res) {
 
 app.get("/retrieveChallenge", async function(req, res) {
   try {
-    let value;
     const challenges = JSON.parse(await fs.readFile("challenges.json", "utf8"));
-    if (req.query.name) {
-      const challenge = challenges[req.query.name];
-      if (!challenge) {
-        return res.json([]);
-      }
-      value = challenge;
-    } else if (req.query.difficulty) {
-
-      const filteredChallenges = Object.values(challenges).filter(challenge =>
-        challenge.difficulty === req.query.difficulty);
-      value = filteredChallenges;
-    } else {
-      value = Object.values(challenges);
-    }
-    return res.json(value)
+    const value = determineValue(req, challenges);
+    return res.json(value);
   } catch (err) {
     if (err.code === 'ENOENT') {
       return res.status(userError).json({error: "No challenges found"});
@@ -80,6 +66,49 @@ app.get("/retrieveChallenge", async function(req, res) {
     return res.status(serverError).json({error: "Error retrieving challenges"});
   }
 });
+
+/**
+ * Writes challenge data to the data object
+ * @param {Object} data - The data object to write to
+ * @param {string} name - Challenge name
+ * @param {string} difficulty - Challenge difficulty
+ * @param {string} topic - Challenge topic
+ * @param {string} solution - Challenge solution
+ * @param {string} notes - Challenge notes
+ */
+function writeData(data, name, difficulty, topic, solution, notes) {
+  data[name] = {
+    name,
+    difficulty,
+    topic,
+    solution,
+    notes
+  };
+}
+
+/**
+ * Determines what value to return based on query parameters
+ * @param {Object} req - Express request object
+ * @param {Object} challenges - Challenges data object
+ * @returns {Array|Object} Filtered challenges or single challenge
+ */
+function determineValue(req, challenges) {
+  if (req.query.name) {
+    const challenge = challenges[req.query.name];
+    if (!challenge) {
+      return [];
+    }
+    value = challenge;
+  } else if (req.query.difficulty) {
+    const filteredChallenges = Object.values(challenges).filter(challenge =>
+      challenge.difficulty === req.query.difficulty
+    );
+    value = filteredChallenges;
+  } else {
+    value = Object.values(challenges);
+  }
+  return value;
+}
 
 const PORT = process.env.PORT || numPort;
 app.listen(PORT);
