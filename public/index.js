@@ -8,7 +8,6 @@
  * to handle API stuff
  */
 
-
 "use strict";
 (function() {
   window.addEventListener('load', init);
