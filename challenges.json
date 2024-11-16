@@ -19,5 +19,12 @@
     "topic": "Math, Number Theory",
     "solution": "class Solution {\n    public int kthFactor(int n, int k) {\n        int count = 0;\n        //counts our current position\n        for (int i = 1; i <= n; i++) {\n            if (n % i == 0) {\n                //increases our counter if we are a kth factor\n                count++;\n                //if count reaches k then it returns the current position\n                if (count == k) {\n                    return i;\n                }\n            }\n        }\n        //returns -1 if we cannot count != k\n        return -1;\n    }\n}",
     "notes": "This problem marks a significant shift in my approach to coding solutions. When I first solved it, I used an array list, following what I had learned from my introductory classes. While it worked, it wasn't very fast and needed to be more space used to extra space. After looking at the discussions, I realized that I didn't need to store all the answers and instead could have a counter variable. Here, I used math to find which position within the loop to return, as that is what we would return anyway. While this seems obvious now, it represents an important lesson in my development that sometimes the tools and patterns we learn in class aren't always the optimal choice for every problem. The evolution from using an ArrayList to just using a counter demonstrates my growth in writing more efficient code. This problem taught me to think beyond my classroom and consider time and space complexity when creating solutions. It's a small change that made a big difference in how I approach problems now\n"
+  },
+  "test": {
+    "name": "test",
+    "difficulty": "Easy",
+    "topic": "test",
+    "solution": "p",
+    "notes": "1"
   }
 }

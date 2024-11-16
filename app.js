@@ -1,71 +1,106 @@
-// app.js
+/**
+ * Justin Hernandez Tovalin
+ * Section: AJ
+ * This is a Node.js web service that manages LeetCode challenges. It provides endpoints
+ * to validate admin access, add/update challenges, and retrieve challenges with
+ * filtering capabilities. The service uses file operations to persist data.
+ */
+
 "use strict";
-const serverError = 500;
-const userError = 400;
-const numPort = 8000;
+
 const express = require("express");
-const app = express();
 const multer = require("multer");
 const fs = require("fs").promises;
 
-// For parsing JSON
-app.use(express.json());
+// Constants
+const SERVER_ERROR = 500;
+const USER_ERROR = 400;
+const PORT = process.env.PORT || 8000;
+const PASSWORD = "shibaInu!=fox";
 
-// Set the correct path to your public folder
+const app = express();
+
+// Middleware
+app.use(express.json());
 app.use(express.static('public'));
 app.use(multer().none());
 app.use(express.urlencoded({extended: true}));
 
-const PASSWORD = "shibaInu!=fox";
-
+/**
+ * Validates admin password for accessing protected features
+ * Returns JSON indicating if provided password is valid
+ */
 app.post("/validate", function(req, res) {
   const submittedPassword = req.body.password;
   if (!submittedPassword) {
-    res.status(userError).json({isValid: false, message: "Missing password parameter"});
+    res.status(USER_ERROR).json({isValid: false, message: "Missing password parameter"});
   } else {
     res.json({isValid: submittedPassword === PASSWORD});
   }
 });
 
+/**
+ * Adds or updates a challenge in the database
+ * Requires all challenge fields in the request body
+ * Returns plain text indicating success or failure
+ */
 app.post("/add", async function(req, res) {
   res.type("text");
   let {name, difficulty, topic, solution, notes} = req.body;
   if (name && difficulty && topic && solution && notes) {
     try {
-      let data = {};
-      const fileExists = await fs.access("challenges.json")
-        .then(() => true)
-        .catch(() => false);
-      if (fileExists) {
-        data = JSON.parse(await fs.readFile("challenges.json", "utf8"));
-      }
-      let challengeExists = data[name];
-      let response = challengeExists ? "Updated challenge information" : "Added new challenge";
+      const data = await readChallengesFile();
+      const challengeExists = data[name];
+      const response = challengeExists ? "Updated challenge information" : "Added new challenge";
       writeData(data, name, difficulty, topic, solution, notes);
       await fs.writeFile("challenges.json", JSON.stringify(data, null, 2));
       res.send(response);
     } catch (err) {
       console.error("Error:", err);
-      res.status(serverError).send("Something went wrong on the server");
+      res.status(SERVER_ERROR).send("Something went wrong on the server");
     }
   } else {
-    res.status(userError).send("Missing required parameters");
+    res.status(USER_ERROR).send("Missing required parameters");
   }
 });
 
+/**
+ * Retrieves challenges based on query parameters
+ * Can filter by name or difficulty, or return all challenges
+ */
 app.get("/retrieveChallenge", async function(req, res) {
   try {
-    const challenges = JSON.parse(await fs.readFile("challenges.json", "utf8"));
+    const challenges = await readChallengesFile();
     const value = determineValue(req, challenges);
     return res.json(value);
   } catch (err) {
     if (err.code === 'ENOENT') {
-      return res.status(userError).json({error: "No challenges found"});
+      return res.status(USER_ERROR).json({error: "No challenges found"});
     }
     console.error("Error reading challenges:", err);
-    return res.status(serverError).json({error: "Error retrieving challenges"});
+    return res.status(SERVER_ERROR).json({error: "Error retrieving challenges"});
   }
 });
+
+/**
+ * Reads and parses the challenges file
+ * @returns {Promise<Object>} The challenges data object
+ */
+async function readChallengesFile() {
+  try {
+    const fileExists = await fs.access("challenges.json")
+      .then(() => true)
+      .catch(() => false);
+
+    if (fileExists) {
+      const data = await fs.readFile("challenges.json", "utf8");
+      return JSON.parse(data);
+    }
+    return {};
+  } catch (err) {
+    throw err;
+  }
+}
 
 /**
  * Writes challenge data to the data object
@@ -78,11 +113,11 @@ app.get("/retrieveChallenge", async function(req, res) {
  */
 function writeData(data, name, difficulty, topic, solution, notes) {
   data[name] = {
-    name,
-    difficulty,
-    topic,
-    solution,
-    notes
+    "name": name,
+    "difficulty": difficulty,
+    "topic": topic,
+    "solution": solution,
+    "notes": notes
   };
 }
 
@@ -93,6 +128,7 @@ function writeData(data, name, difficulty, topic, solution, notes) {
  * @returns {Array|Object} Filtered challenges or single challenge
  */
 function determineValue(req, challenges) {
+  let value;
   if (req.query.name) {
     const challenge = challenges[req.query.name];
     if (!challenge) {
@@ -110,5 +146,4 @@ function determineValue(req, challenges) {
   return value;
 }
 
-const PORT = process.env.PORT || numPort;
 app.listen(PORT);

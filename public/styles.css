@@ -12,6 +12,10 @@
   box-sizing: border-box;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Global styles */
 html {
   scroll-behavior: smooth;
@@ -170,10 +174,6 @@ section {
 
 .expanded .challenge-content {
   display: block;
-}
-
-.hidden {
-  display: none;
 }
 
 /* Form Elements */
