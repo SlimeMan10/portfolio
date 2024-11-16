@@ -55,21 +55,23 @@ app.post("/add", async function(req, res) {
 
 app.get("/retrieveChallenge", async function(req, res) {
   try {
+    let value;
     const challenges = JSON.parse(await fs.readFile("challenges.json", "utf8"));
     if (req.query.name) {
       const challenge = challenges[req.query.name];
       if (!challenge) {
         return res.json([]);
       }
-      return res.json(challenge);
+      value = challenge;
     } else if (req.query.difficulty) {
+
       const filteredChallenges = Object.values(challenges).filter(challenge =>
-        challenge.difficulty === req.query.difficulty
-      );
-      return res.json(filteredChallenges);
+        challenge.difficulty === req.query.difficulty);
+      value = filteredChallenges;
     } else {
-      return res.json(Object.values(challenges));
+      value = Object.values(challenges);
     }
+    return res.json(value)
   } catch (err) {
     if (err.code === 'ENOENT') {
       return res.status(userError).json({error: "No challenges found"});
@@ -78,7 +80,6 @@ app.get("/retrieveChallenge", async function(req, res) {
     return res.status(serverError).json({error: "Error retrieving challenges"});
   }
 });
-
 
 const PORT = process.env.PORT || numPort;
 app.listen(PORT);

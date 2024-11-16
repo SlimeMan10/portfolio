@@ -116,7 +116,7 @@
    * @param {Array} challenges - Array of challenge objects
    */
   function createChallenges(challenges) {
-    const challengesArray = Array.isArray(challenges) ? challenges : [challenges]
+    const challengesArray = Array.isArray(challenges) ? challenges : [challenges];
     challengesArray.forEach(element => {
       const challengeCard = createChallengeCard();
       const header = createHeader(element);
@@ -249,7 +249,6 @@
       const result = await response.json();
 
       if (result.isValid) {
-        console.log("Login successful");
         id('challenge-content').classList.toggle('hidden');
         id('admin-password').value = '';
         id('admin-login').classList.toggle('hidden');
