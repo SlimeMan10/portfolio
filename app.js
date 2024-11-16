@@ -131,15 +131,14 @@ function writeData(data, name, difficulty, topic, solution, notes) {
 function determineValue(req, challenges) {
   let value;
   if (req.query.name) {
-    const challenge = challenges[req.query.name];
+    const challenge = c[req.query.name];
     if (!challenge) {
       return [];
     }
     value = challenge;
   } else if (req.query.difficulty) {
-    const filteredChallenges = Object.values(challenges).filter(challenge =>
-      challenge.difficulty === req.query.difficulty);
-    value = filteredChallenges;
+    const filtered = Object.values(challenges).filter(c => c.difficulty === req.query.difficulty);
+    value = filtered;
   } else {
     value = Object.values(challenges);
   }
