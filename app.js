@@ -137,7 +137,7 @@ function determineValue(req, challenges) {
     }
     value = challenge;
   } else if (req.query.difficulty) {
-    const filtered = intermediateStep(challenges, req)
+    const filtered = intermediateStep(challenges, req);
     value = filtered;
   } else {
     value = Object.values(challenges);
@@ -146,23 +146,23 @@ function determineValue(req, challenges) {
 }
 
 /**
-* Filters challenges array by applying difficulty filter
-* @param {Object} challenges - Challenges data object
-* @param {Object} req - Express request object
-* @returns {Array} Filtered array of challenges
-*/
+ * Filters challenges array by applying difficulty filter
+ * @param {Object} challenges - Challenges data object
+ * @param {Object} req - Express request object
+ * @returns {Array} Filtered array of challenges
+ */
 function intermediateStep(challenges, req) {
   return Object.values(challenges).filter(challenge => filterByDifficulty(challenge, req));
- }
+}
 
- /**
+/**
  * Checks if challenge matches requested difficulty
  * @param {Object} challenge - Individual challenge object
  * @param {Object} req - Express request object
  * @returns {boolean} True if difficulty matches, false otherwise
  */
- function filterByDifficulty(challenge, req) {
+function filterByDifficulty(challenge, req) {
   return challenge.difficulty === req.query.difficulty;
- }
+}
 
 app.listen(PORT);
