@@ -136,27 +136,28 @@
             <input type="password" id="admin-password" placeholder="Enter password">
             <button id="login-btn">Login</button>
           </div>
-          <form id="add-challenge-form" class="hidden">
-            <h2>Add New Challenge</h2>
-            <input type="text" id="challenge-name" placeholder="Challenge name" required>
-            <select id="challenge-difficulty" required>
-              <option value="">Select Difficulty</option>
-              <option value="Easy">Easy</option>
-              <option value="Medium">Medium</option>
-              <option value="Hard">Hard</option>
-            </select>
-            <input
-              type="text"
-              id="challenge-topic"
-              placeholder="Topic (e.g., Arrays, Strings)"
-              required
-            >
-            <textarea id="challenge-solution" placeholder="Your solution" required></textarea>
-            <textarea id="challenge-notes" placeholder="Your notes" required></textarea>
-            <button type="submit" id="add-challenge">Add Challenge</button>
-          </form>
+          <div id="challenge-content" class="hidden">
+            <form id="add-challenge-form">
+              <h2>Add New Challenge</h2>
+              <input type="text" id="challenge-name" placeholder="Challenge name" required>
+              <select id="challenge-difficulty" required>
+                <option value="">Select Difficulty</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+              </select>
+              <input
+                type="text"
+                id="challenge-topic"
+                placeholder="Topic (e.g., Arrays, Strings)"
+                required
+              >
+              <textarea id="challenge-solution" placeholder="Your solution" required></textarea>
+              <textarea id="challenge-notes" placeholder="Your notes" required></textarea>
+              <button type="submit" id="add-challenge">Add Challenge</button>
+            </form>
+          </div>
         </div>
-      </section>
     </main>
 
     <footer id="contact">

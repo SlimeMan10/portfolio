@@ -36,7 +36,6 @@ app.post("/add", async function(req, res) {
       const fileExists = await fs.access("challenges.json")
         .then(() => true)
         .catch(() => false);
-
       if (fileExists) {
         data = JSON.parse(await fs.readFile("challenges.json", "utf8"));
       }
@@ -57,22 +56,29 @@ app.post("/add", async function(req, res) {
 app.get("/retrieveChallenge", async function(req, res) {
   try {
     const challenges = JSON.parse(await fs.readFile("challenges.json", "utf8"));
-
     if (req.query.name) {
-      const requestedChallenge = challenges[req.query.name];
-      if (requestedChallenge) {
-        res.json(requestedChallenge);
-      } else {
-        res.status(serverError).json({error: "Challenge not found"});
+      const challenge = challenges[req.query.name];
+      if (!challenge) {
+        return res.json([]);
       }
+      return res.json(challenge);
+    } else if (req.query.difficulty) {
+      const filteredChallenges = Object.values(challenges).filter(challenge =>
+        challenge.difficulty === req.query.difficulty
+      );
+      return res.json(filteredChallenges);
     } else {
-      res.json(Object.values(challenges));
+      return res.json(Object.values(challenges));
     }
   } catch (err) {
+    if (err.code === 'ENOENT') {
+      return res.status(userError).json({error: "No challenges found"});
+    }
     console.error("Error reading challenges:", err);
-    res.status(serverError).json({error: "Error retrieving challenges"});
+    return res.status(serverError).json({error: "Error retrieving challenges"});
   }
 });
+
 
 const PORT = process.env.PORT || numPort;
 app.listen(PORT);

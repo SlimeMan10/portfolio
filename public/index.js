@@ -64,13 +64,18 @@
    */
   async function loadChallenges() {
     try {
-      const response = await fetch("/retrieveChallenge", {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
+      const search = id('search-challenges').value;
+      const diff = id('filter-difficulty').value;
+      let response;
+      if (search) {
+        let name = "?name=" + search;
+        response = await fetchChallenges(name);
+      } else if (diff) {
+        let difficulty = "?difficulty=" + diff;
+        response = await fetchChallenges(difficulty);
+      } else {
+        response = await fetchChallenges("");
+      }
       if (response.ok) {
         const challenges = await response.json();
         displayChallenges(challenges);
@@ -83,42 +88,39 @@
   }
 
   /**
+   * Fetches challenges from the server based on filter type
+   * @param {string} type - Query parameter for filtering challenges
+   * @returns {Promise<Response>} The fetch response
+   */
+  async function fetchChallenges(type) {
+    const response = await fetch("/retrieveChallenge" + type, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return response;
+  }
+
+  /**
    * Displays filtered challenges based on search and difficulty
    * @param {Array} challenges - Array of challenge objects
    */
   function displayChallenges(challenges) {
     id('challenges-container').innerHTML = '';
-    const search = id('search-challenges').value;
-    const diff = id('filter-difficulty').value;
-
-    let filteredChallenges = challenges;
-    if (search) {
-      filteredChallenges = challenges.filter(challenge => {
-        const challengeName = challenge.name.toLowerCase();
-        const searchTerm = search.toLowerCase();
-        return challengeName.includes(searchTerm);
-      });
-    } else if (['Easy', 'Medium', 'Hard'].includes(diff)) {
-      filteredChallenges = challenges.filter(challenge => challenge.difficulty === diff);
-    }
-    createNormalChallenges(filteredChallenges);
+    createChallenges(challenges);
   }
 
   /**
    * Creates and displays challenge cards
    * @param {Array} challenges - Array of challenge objects
    */
-  function createNormalChallenges(challenges) {
-    challenges.forEach(element => {
-      const challengeCard = gen('div');
-      challengeCard.classList.add('challenge-card');
-      const header = gen('div');
-      header.classList.add('challenge-header');
-      const name = createCardName(element);
-      header.appendChild(name);
-      const content = gen('div');
-      content.classList.add('challenge-content');
-      content.classList.add('hidden');
+  function createChallenges(challenges) {
+    const challengesArray = Array.isArray(challenges) ? challenges : [challenges]
+    challengesArray.forEach(element => {
+      const challengeCard = createChallengeCard();
+      const header = createHeader(element);
+      const content = createContent();
       const difficulty = createCardDifficulty(element);
       const topic = createCardTopic(element);
       const solution = createCardSolution(element);
@@ -135,6 +137,40 @@
       challengeCard.appendChild(content);
       id('challenges-container').appendChild(challengeCard);
     });
+  }
+
+  /**
+   * Creates a new challenge card container
+   * @return {HTMLElement} The challenge card container element
+   */
+  function createChallengeCard() {
+    const challengeCard = gen('div');
+    challengeCard.classList.add('challenge-card');
+    return challengeCard;
+  }
+
+  /**
+   * Creates the header section of a challenge card
+   * @param {Object} element - Challenge data object
+   * @return {HTMLElement} The header element
+   */
+  function createHeader(element) {
+    const header = gen('div');
+    header.classList.add('challenge-header');
+    const name = createCardName(element);
+    header.appendChild(name);
+    return header;
+  }
+
+  /**
+   * Creates the content section of a challenge card
+   * @return {HTMLElement} The content container element
+   */
+  function createContent() {
+    const content = gen('div');
+    content.classList.add('challenge-content');
+    content.classList.add('hidden');
+    return content;
   }
 
   /**
@@ -213,12 +249,13 @@
       const result = await response.json();
 
       if (result.isValid) {
+        console.log("Login successful");
+        id('challenge-content').classList.toggle('hidden');
+        id('admin-password').value = '';
         id('admin-login').classList.toggle('hidden');
-        const addForm = id("add-challenge-form");
-        addForm.classList.remove('hidden');
       } else {
         id('admin-password').value = '';
-        id('admin-password').textContent = "Try again";
+        id('admin-password').placeholder = "Try again";
       }
     } catch (error) {
       console.error('Error:', error);
