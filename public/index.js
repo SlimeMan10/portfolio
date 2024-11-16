@@ -1,11 +1,13 @@
-/*
-  Justin Hernandez Tovalin
-  Nov 16, 2024
-  TA: Kathyrn Koehler
-  CP4
-  This is the index.js doc of my portfolio. It handles primarly my implemented API.
-  However in the future I may make it handle more but as for now it just needs to handle API stuff
-*/
+/**
+ * Justin Hernandez Tovalin
+ * Nov 16, 2024
+ * TA: Kathyrn Koehler
+ * CP4
+ * This is the index.js doc of my portfolio. It handles primarily my implemented API.
+ * However in the future I may make it handle more but as for now it just needs
+ * to handle API stuff
+ */
+
 
 "use strict";
 (function() {
@@ -328,10 +330,10 @@
   }
 
   /**
-  * Check if response was successful or throw an error with api error message
-  * @param {Response} response - The response from the fetch request
-  * @returns {Response} The response if successful
-  */
+   * Check if response was successful or throw an error with api error message
+   * @param {Response} response - The response from the fetch request
+   * @returns {Response} The response if successful
+   */
   function statusCheck(response) {
     if (!response.ok) {
       throw new Error('Network response was not ok!');

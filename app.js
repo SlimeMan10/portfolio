@@ -15,7 +15,8 @@ const fs = require("fs").promises;
 // Constants
 const SERVER_ERROR = 500;
 const USER_ERROR = 400;
-const PORT = process.env.PORT || 8000;
+const PORT_NUMBER = 8000;
+const PORT = process.env.PORT || PORT_NUMBER;
 const PASSWORD = "shibaInu!=fox";
 
 const app = express();
@@ -137,8 +138,7 @@ function determineValue(req, challenges) {
     value = challenge;
   } else if (req.query.difficulty) {
     const filteredChallenges = Object.values(challenges).filter(challenge =>
-      challenge.difficulty === req.query.difficulty
-    );
+      challenge.difficulty === req.query.difficulty);
     value = filteredChallenges;
   } else {
     value = Object.values(challenges);
