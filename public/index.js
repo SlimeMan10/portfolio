@@ -1,4 +1,12 @@
-// index.js
+/*
+  Justin Hernandez Tovalin
+  Nov 16, 2024
+  TA: Kathyrn Koehler
+  CP4
+  This is the index.js doc of my portfolio. It handles primarly my implemented API.
+  However in the future I may make it handle more but as for now it just needs to handle API stuff
+*/
+
 "use strict";
 (function() {
   window.addEventListener('load', init);
@@ -76,15 +84,24 @@
       } else {
         response = await fetchChallenges("");
       }
-      if (response.ok) {
-        const challenges = await response.json();
-        displayChallenges(challenges);
-      } else {
-        console.error("Error loading challenges");
-      }
+      response = await statusCheck(response);
+      const challenges = await response.json();
+      displayChallenges(challenges);
     } catch (err) {
-      console.error("Error: ", err);
+      handleError(err);
     }
+  }
+
+  /**
+   * Displays error message to user
+   * @param {Error} err - Error object to display
+   */
+  function handleError(err) {
+    const container = id('challenges-container');
+    container.innerHTML = '';
+    const errorMsg = gen('p');
+    errorMsg.textContent = err.message;
+    container.appendChild(errorMsg);
   }
 
   /**
@@ -246,6 +263,7 @@
         body: JSON.stringify(data)
       });
 
+      await statusCheck(response);
       const result = await response.json();
 
       if (result.isValid) {
@@ -257,7 +275,7 @@
         id('admin-password').placeholder = "Try again";
       }
     } catch (error) {
-      console.error('Error:', error);
+      handleError(error);
     }
   }
 
@@ -273,13 +291,12 @@
         solution: id('challenge-solution').value,
         notes: id('challenge-notes').value
       };
-
       const response = await fetch('/add', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(challengeData)
       });
-
+      await statusCheck(response);
       if (response.ok) {
         // Clear form fields
         ['name', 'topic', 'solution', 'notes'].forEach(field => {
@@ -288,7 +305,7 @@
         id('challenge-difficulty').value = 'Easy';
       }
     } catch (error) {
-      console.error('Error: ', error);
+      handleError(error);
     }
   }
 
@@ -308,5 +325,17 @@
    */
   function gen(item) {
     return document.createElement(item);
+  }
+
+  /**
+  * Check if response was successful or throw an error with api error message
+  * @param {Response} response - The response from the fetch request
+  * @returns {Response} The response if successful
+  */
+  function statusCheck(response) {
+    if (!response.ok) {
+      throw new Error('Network response was not ok!');
+    }
+    return response;
   }
 })();
