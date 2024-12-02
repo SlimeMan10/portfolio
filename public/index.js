@@ -45,7 +45,31 @@
    * Sets up button events for all card links
    */
   function buttonEvents() {
-    openPage('resume', 'https://tinyurl.com/nzpwnmw6');
+    // Update the resume button event
+let resumeBtn = qs(".button-container #resume")
+if (resumeBtn) {
+  resumeBtn.addEventListener('click', () => {
+    try {
+      window.open('https://tinyurl.com/nzpwnmw6', '_blank');
+    } catch (error) {
+      console.error('Error opening resume:', error);
+    }
+  });
+}
+
+// Contact jump button event
+const contactJump = id('contact-jump');
+if (contactJump) {
+  contactJump.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent default link behavior
+    const contactSection = id('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+}
+
+    // Other cards
     openPage('java-card', 'https://tinyurl.com/4ma4b4ex');
     openPage('html-card', 'https://tinyurl.com/2cdttxtx');
     openPage('css-card', 'https://tinyurl.com/2suk2e2v');
@@ -61,6 +85,7 @@
    */
   function openPage(itemId, link) {
     const element = id(itemId);
+    console.log(element);
     if (element) {
       element.addEventListener('click', function() {
         window.open(link, '_blank');
@@ -338,5 +363,9 @@
       throw new Error('Network response was not ok!');
     }
     return response;
+  }
+
+  function qs(item) {
+    return document.querySelector(item);
   }
 })();
