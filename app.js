@@ -83,6 +83,24 @@ app.get("/retrieveChallenge", async function(req, res) {
   }
 });
 
+app.post("email", async function(req, res) {
+  try {
+    let name = req.body.name;
+    let email = req.body.email;
+    let text = req.body.text;
+    const fileExists = await fs.access("challenges.json")
+      .then(() => true)
+      .catch(() => false);
+
+    if (fileExists) {
+      const data = await fs.readFile("challenges.json", "utf8");
+      res.type("text").send("Added to emails")
+    }
+  } catch (err) {
+    console.error(err);
+  }
+})
+
 /**
  * Reads and parses the challenges file
  * @returns {Promise<Object>} The challenges data object
@@ -164,23 +182,5 @@ function intermediateStep(challenges, req) {
 function filterByDifficulty(challenge, req) {
   return challenge.difficulty === req.query.difficulty;
 }
-
-app.post("email", async function(req, res) {
-  try {
-    let name = req.body.name;
-    let email = req.body.email;
-    let text = req.body.text;
-    const fileExists = await fs.access("challenges.json")
-      .then(() => true)
-      .catch(() => false);
-
-    if (fileExists) {
-      const data = await fs.readFile("challenges.json", "utf8");
-      res.type("text").send("Added to emails")
-    }
-  } catch (err) {
-    console.error(err);
-  }
-})
 
 app.listen(PORT);
