@@ -164,6 +164,6 @@ function filterByDifficulty(challenge, req) {
   return challenge.difficulty === req.query.difficulty;
 }
 
-const PORT_NUMBER = 8000;
+const PORT_NUMBER = 3000;
 const PORT = process.env.PORT || PORT_NUMBER;
 app.listen(PORT);

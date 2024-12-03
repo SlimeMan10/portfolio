@@ -46,13 +46,16 @@
    */
   function buttonEvents() {
     openPage('resume', 'https://tinyurl.com/nzpwnmw6');
-    openPage('java-card', 'https://tinyurl.com/4ma4b4ex');
-    openPage('html-card', 'https://tinyurl.com/2cdttxtx');
-    openPage('css-card', 'https://tinyurl.com/2suk2e2v');
-    openPage('javascript-card', 'https://tinyurl.com/29rjtyrm');
-    openPage('sql-card', 'https://tinyurl.com/2mkkfkm5');
-    openPage('node-card', 'https://tinyurl.com/mryd2jj6');
+    openPage('java-card', 'https://aws.amazon.com/what-is/java/');
+    openPage('html-card', 'https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics');
+    openPage('css-card', 'https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/What_is_CSS');
+    openPage('javascript-card', 'https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript');
+    openPage('sql-card', 'https://aws.amazon.com/what-is/sql/');
+    openPage('node-card', 'https://nodejs.org/en/about');
     openPage('profile-image', 'https://shorturl.at/6L9DC');
+    openPage('calculator', 'https://shorturl.at/IxaOk')
+    openPage('tracker', 'https://github.com/SlimeMan10/Fitness-Tracking');
+    openPage('bitcoin', 'https://github.com/SlimeMan10/currentBitcoinPrice');
   }
 
   /**
