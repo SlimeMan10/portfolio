@@ -52,6 +52,7 @@
     openPage('javascript-card', 'https://tinyurl.com/29rjtyrm');
     openPage('sql-card', 'https://tinyurl.com/2mkkfkm5');
     openPage('node-card', 'https://tinyurl.com/mryd2jj6');
+    openPage('profile-image', 'https://shorturl.at/6L9DC');
   }
 
   /**

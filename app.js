@@ -15,8 +15,7 @@ const fs = require("fs").promises;
 // Constants
 const SERVER_ERROR = 500;
 const USER_ERROR = 400;
-const PORT_NUMBER = 8000;
-const PORT = process.env.PORT || PORT_NUMBER;
+
 const PASSWORD = "shibaInu!=fox";
 
 const app = express();
@@ -82,24 +81,6 @@ app.get("/retrieveChallenge", async function(req, res) {
     return res.status(SERVER_ERROR).json({error: "Error retrieving challenges"});
   }
 });
-
-app.post("email", async function(req, res) {
-  try {
-    let name = req.body.name;
-    let email = req.body.email;
-    let text = req.body.text;
-    const fileExists = await fs.access("challenges.json")
-      .then(() => true)
-      .catch(() => false);
-
-    if (fileExists) {
-      const data = await fs.readFile("challenges.json", "utf8");
-      res.type("text").send("Added to emails")
-    }
-  } catch (err) {
-    console.error(err);
-  }
-})
 
 /**
  * Reads and parses the challenges file
@@ -183,4 +164,6 @@ function filterByDifficulty(challenge, req) {
   return challenge.difficulty === req.query.difficulty;
 }
 
+const PORT_NUMBER = 8000;
+const PORT = process.env.PORT || PORT_NUMBER;
 app.listen(PORT);
