@@ -1,0 +1,432 @@
+/*
+  Name: Justin Hernandez-Tovalin
+  Date: October 31, 2024
+  Section: AE Kathryn
+  This is the styles.css file for my portfolio project.
+*/
+
+/* Root variables */
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #f59e0b;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+}
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
+html {
+  scroll-padding-top: 2rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+}
+
+/* Common Section Styling */
+.section-white {
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 2rem;
+}
+
+.section-white h2 {
+  color: black;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.section-content {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.section-content p {
+  color: #333333;
+  margin-bottom: 1.5rem;
+}
+
+/* Top-of-page section styling */
+#top-of-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+#introduction {
+  color: #4a148c;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Cards Container */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 2.5rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card styling */
+.card {
+  background-color: var(--bg-primary);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1), 0 10px 10px -5px rgba(99, 102, 241, 0.04);
+}
+
+.card i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  padding: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--bg-secondary);
+}
+
+.card:hover i {
+  transform: scale(1.1);
+  background-color: var(--primary);
+  color: white !important;
+}
+
+.card p {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0;
+  color: var(--primary-dark);
+}
+
+/* Language-specific icon colors */
+.fa-java { color: #007396; }
+.fa-html5 { color: #e34f26; }
+.fa-css3-alt { color: #1572b6; }
+.fa-js {
+  color: #f7df1e;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.fa-database { color: #336791; }
+.fa-node { color: #339933; }
+
+/* Code Challenges Section */
+.challenge-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Form Elements */
+input,
+select,
+textarea {
+  padding: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+textarea {
+  min-height: 150px;
+  font-family: monospace;
+  resize: vertical;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Button styling */
+button,
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  background-color: #4a148c;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Project Links */
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  background-color: #4a148c;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.project-links a:hover {
+  background-color: #6a1b9a;
+  transform: translateY(-2px);
+}
+
+/* Contact Form */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Admin section */
+.admin-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .section-white h2 {
+    font-size: 2.5rem;
+  }
+
+  #introduction {
+    font-size: 1.5rem;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .card i {
+    font-size: 2.5rem;
+  }
+
+  .section-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-white h2 {
+    font-size: 2rem;
+  }
+
+  section {
+    padding: 2rem 1rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .card i {
+    font-size: 2rem;
+  }
+}
+
+ /* Add smooth transitions for sections */
+.section-content {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Improve text readability */
+.section-content {
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+
+h2, h3 {
+  letter-spacing: -0.5px;
+}
+
+/* Add subtle border to sections */
+.section-content {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Add gradient hover effect to buttons */
+button:hover,
+.button-link:hover {
+  background: linear-gradient(45deg, #4a148c, #6a1b9a);
+  transform: translateY(-2px);
+}
+
+/* Better accessibility for keyboard navigation */
+button:focus,
+.button-link:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid #4a148c;
+  outline-offset: 2px;
+}
+
+@media print {
+  .section-content {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  button,
+  .button-link {
+    display: none;
+  }
+}
+
+.profile-container {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+  background-color: white;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Optional: Add a subtle background effect */
+.profile-background {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #4a148c, #6a1b9a);
+  top: -5px;
+  left: -5px;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.profile-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 2rem auto;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 50%;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.profile-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image svg {
+  width: 80%;
+  height: 80%;
+  fill: #d35f29; /* Classic Shiba Inu orange/red color */
+}
+
+/* Optional: Add a slight rotation on hover for more playfulness */
+.profile-image:hover svg {
+  transform: rotate(5deg);
+  transition: transform 0.3s ease;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+   line-height: 1.6;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+   background-image: url('data:image/svg+xml,<svg width="100%" height="100%" id="svg" viewBox="0 0 1440 690" xmlns="http://www.w3.org/2000/svg" class="transition duration-300 ease-in-out delay-150"><defs><linearGradient id="gradient" x1="24%" y1="8%" x2="76%" y2="92%"><stop offset="5%" stop-color="%2336013f"></stop><stop offset="95%" stop-color="%239f517d"></stop></linearGradient></defs><path d="M 0,700 L 0,105 C 69.85162002945506,130.96446980854196 139.70324005891013,156.92893961708393 198,155 C 256.2967599410899,153.07106038291607 303.0386597938145,123.24871134020619 365,122 C 426.9613402061855,120.75128865979381 504.14212076583203,148.07621502209133 560,135 C 615.857879234168,121.92378497790868 650.3928571428572,68.44642857142857 697,69 C 743.6071428571428,69.55357142857143 802.2864506627393,124.1380706921944 877,125 C 951.7135493372607,125.8619293078056 1042.4613402061855,73.00128865979383 1108,66 C 1173.5386597938145,58.99871134020618 1213.8681885125184,97.85677466863035 1265,112 C 1316.1318114874816,126.14322533136965 1378.0659057437408,115.57161266568482 1440,105 L 1440,700 L 0,700 Z" stroke="none" stroke-width="0" fill="url(%23gradient)" fill-opacity="0.265" class="transition-all duration-300 ease-in-out delay-150 path-0"></path><defs><linearGradient id="gradient" x1="24%" y1="8%" x2="76%" y2="92%"><stop offset="5%" stop-color="%2336013f"></stop><stop offset="95%" stop-color="%239f517d"></stop></linearGradient></defs><path d="M 0,700 L 0,245 C 41.65408689248896,265.39138438880707 83.30817378497792,285.78276877761414 151,286 C 218.69182621502208,286.21723122238586 312.4213917525773,266.2603092783505 379,258 C 445.5786082474227,249.7396907216495 485.0062592047128,253.17599410898384 533,268 C 580.9937407952872,282.82400589101616 637.5535714285714,309.0357142857143 693,292 C 748.4464285714286,274.9642857142857 802.7794550810016,214.68114874815905 868,204 C 933.2205449189984,193.31885125184095 1009.3286082474226,232.23969072164948 1076,251 C 1142.6713917525774,269.7603092783505 1199.9061119293078,268.36008836524303 1259,264 C 1318.0938880706922,259.63991163475697 1379.046944035346,252.31995581737849 1440,245 L 1440,700 L 0,700 Z" stroke="none" stroke-width="0" fill="url(%23gradient)" fill-opacity="0.4" class="transition-all duration-300 ease-in-out delay-150 path-1"></path><defs><linearGradient id="gradient" x1="24%" y1="8%" x2="76%" y2="92%"><stop offset="5%" stop-color="%2336013f"></stop><stop offset="95%" stop-color="%239f517d"></stop></linearGradient></defs><path d="M 0,700 L 0,385 C 74.27577319587628,398.2621502209131 148.55154639175257,411.5243004418262 202,425 C 255.44845360824743,438.4756995581738 288.069587628866,452.1649484536083 343,436 C 397.930412371134,419.8350515463917 475.1701030927835,373.8159057437408 549,373 C 622.8298969072165,372.1840942562592 693.25,416.57142857142856 751,426 C 808.75,435.42857142857144 853.8298969072166,409.8983799705449 912,406 C 970.1701030927834,402.1016200294551 1041.430412371134,419.8350515463917 1108,420 C 1174.569587628866,420.1649484536083 1236.4484536082473,402.76141384388814 1291,394 C 1345.5515463917527,385.23858615611186 1392.7757731958764,385.11929307805593 1440,385 L 1440,700 L 0,700 Z" stroke="none" stroke-width="0" fill="url(%23gradient)" fill-opacity="0.53" class="transition-all duration-300 ease-in-out delay-150 path-2"></path><defs><linearGradient id="gradient" x1="24%" y1="8%" x2="76%" y2="92%"><stop offset="5%" stop-color="%2336013f"></stop><stop offset="95%" stop-color="%239f517d"></stop></linearGradient></defs><path d="M 0,700 L 0,525 C 65.18078055964654,515.9118188512518 130.36156111929307,506.8236377025037 191,500 C 251.63843888070693,493.1763622974963 307.7345360824743,488.6172680412371 360,484 C 412.2654639175257,479.3827319587629 460.70029455081,474.7072901325479 521,486 C 581.29970544919,497.2927098674521 653.4642857142859,524.5535714285714 725,524 C 796.5357142857141,523.4464285714286 867.4425625920469,495.07842415316645 919,495 C 970.5574374079531,494.92157584683355 1002.765463917526,523.1327319587629 1052,524 C 1101.234536082474,524.8672680412371 1167.4955817378498,498.39064801178205 1235,494 C 1302.5044182621502,489.60935198821795 1371.2522091310752,507.30467599410895 1440,525 L 1440,700 L 0,700 Z" stroke="none" stroke-width="0" fill="url(%23gradient)" fill-opacity="1" class="transition-all duration-300 ease-in-out delay-150 path-3"></path></svg>');
+   }
