@@ -56,6 +56,7 @@
     openPage('calculator', 'https://shorturl.at/IxaOk')
     openPage('tracker', 'https://github.com/SlimeMan10/Fitness-Tracking');
     openPage('bitcoin', 'https://github.com/SlimeMan10/currentBitcoinPrice');
+    openPage('store', 'https://github.com/SlimeMan10/CSE154FinalProject');
   }
 
   /**

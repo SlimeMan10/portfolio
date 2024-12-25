@@ -14,6 +14,27 @@
   --bg-secondary: #f3f4f6;
 }
 
+#about-me-text {
+  color: #333333;
+}
+
+#projects-text {
+  color: #363636;
+}
+
+#skills-text {
+  color: #EAEAEA;
+}
+
+#sac {
+  color: #EAEAEA;
+}
+
+#contact-text {
+  color: #ffffff;
+}
+
+
 /* Reset default styles */
 * {
   margin: 0;
@@ -72,7 +93,7 @@ body {
 }
 
 #introduction {
-  color: #4a148c;
+  color: #1a1a1a;
   font-size: 2rem;
   margin-bottom: 1rem;
 }
